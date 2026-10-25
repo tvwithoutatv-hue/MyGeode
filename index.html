@@ -1,87 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10131d">
-  <meta name="description" content="MyGeode: un port comunitario de Geode para Geometry Dash.">
-  <title>MyGeode — Mods para Geometry Dash</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
-    :root{--bg:#10131d;--panel:#171b28;--muted:#9ba3b9;--text:#f7f8ff;--purple:#a78bfa;--cyan:#79e5ff;--line:#ffffff16;--max:1160px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}button{font:inherit}
-    .wrap{width:min(var(--max),calc(100% - 44px));margin:auto}.topbar{position:sticky;top:0;z-index:5;background:#10131de8;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}nav{height:72px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font:700 20px 'Space Grotesk',sans-serif;letter-spacing:-.5px}.brand-mark{width:35px;height:35px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(145deg,#b59aff,#6478ff);box-shadow:0 5px 22px #9175ff45}.brand-mark svg{width:23px}.links{display:flex;gap:32px;align-items:center;color:#c3c8d8;font-size:14px}.links a:hover{color:white}.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:12px;font-weight:700;transition:.2s}.nav-cta{padding:10px 17px;background:#ffffff12;border:1px solid var(--line);font-size:13px}.nav-cta:hover,.button:hover{transform:translateY(-2px)}
-    .hero{min-height:670px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px;padding:88px 0 92px;position:relative}.hero:before{content:"";position:absolute;width:530px;height:530px;right:1%;top:8%;border-radius:50%;background:radial-gradient(circle,#7657dd32,transparent 68%);pointer-events:none}.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid #a78bfa42;background:#a78bfa0e;color:#c2aaff;border-radius:99px;padding:7px 12px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.dot{width:7px;height:7px;background:#a78bfa;border-radius:50%;box-shadow:0 0 12px #a78bfa}.hero h1{font:700 clamp(52px,7vw,82px)/.99 'Space Grotesk',sans-serif;letter-spacing:-.065em;margin:26px 0 20px}.hero h1 span{background:linear-gradient(100deg,#c0a8ff 10%,#81e4ff 88%);-webkit-background-clip:text;color:transparent}.hero p{max-width:530px;color:#aeb5c8;font-size:17px;line-height:1.8;margin:0}.actions{display:flex;gap:13px;margin-top:31px;flex-wrap:wrap}.button{padding:14px 20px;font-size:14px}.primary{background:linear-gradient(110deg,#aa8cff,#7775ff);color:white;box-shadow:0 9px 30px #8666ec40}.secondary{border:1px solid #ffffff23;background:#ffffff08}.button svg{width:17px;height:17px}.hint{margin-top:16px!important;font-size:12px!important;color:#788198!important}
-    .visual{position:relative;z-index:1;display:grid;place-items:center;min-height:380px}.orb{width:min(330px,72vw);aspect-ratio:1;border-radius:36%;transform:rotate(-9deg);display:grid;place-items:center;background:linear-gradient(140deg,#b6a0ff,#8272ff 48%,#54c8f1);box-shadow:0 40px 100px #6c58d94c,inset 0 2px 2px #ffffff80;position:relative}.orb:before{content:"";position:absolute;inset:15px;border:1px solid #ffffff49;border-radius:34%}.orb svg{width:48%;filter:drop-shadow(0 14px 10px #3d2b8b60);transform:rotate(9deg)}.float-card{position:absolute;background:#1d2232eF;border:1px solid #ffffff20;padding:13px 16px;border-radius:15px;box-shadow:0 12px 40px #0005;backdrop-filter:blur(14px);font-size:12px;color:#c7cede}.float-card strong{display:block;color:white;font-size:14px;margin-bottom:1px}.card-one{right:0;top:17%}.card-two{left:0;bottom:14%}.spark{position:absolute;color:#d4c5ff;font-size:26px}.spark.s1{top:10%;left:15%}.spark.s2{bottom:13%;right:11%;font-size:18px}
-    .strip{border-block:1px solid var(--line);background:#ffffff04}.strip-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:23px 0;color:#b5bdd0;font-size:13px}.strip-in span{display:flex;align-items:center;gap:9px}.strip-in b{font-weight:600;color:#e4e7f0}.strip-icon{color:#a994ff;font-size:17px}
-    section.content{padding:105px 0}.section-head{text-align:center;max-width:680px;margin:0 auto 48px}.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#a993ff;font-weight:800}.section-head h2{font:700 clamp(34px,5vw,48px)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.045em;margin:14px 0}.section-head p{margin:0;color:var(--muted);font-size:16px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{padding:27px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#ffffff08,#ffffff02);min-height:210px}.feature-icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;background:#9b84ff19;color:#beaaff;font-size:20px;margin-bottom:22px}.feature h3{font:700 18px 'Space Grotesk',sans-serif;margin:0 0 8px}.feature p{font-size:14px;color:var(--muted);margin:0;line-height:1.7}
-    .download{padding:0 0 100px}.download-box{overflow:hidden;position:relative;padding:60px;border:1px solid #b39cff36;border-radius:28px;background:radial-gradient(ellipse at 90% 5%,#7560d52e,transparent 44%),linear-gradient(135deg,#1a1e2d,#171a28)}.download-box h2{font:700 40px 'Space Grotesk',sans-serif;letter-spacing:-.04em;margin:10px 0}.download-box p{color:#aeb5c8;max-width:650px;margin:0 0 24px}.platforms{display:flex;gap:11px;flex-wrap:wrap;margin:26px 0 18px}.platform{padding:10px 15px;border:1px solid #ffffff1c;background:#ffffff08;border-radius:11px;color:#e7e8f0;font-size:13px}.release-note{border-top:1px solid var(--line);padding-top:18px;margin-top:27px!important;font-size:12px;color:#818ba2!important}.soon{opacity:.65;cursor:not-allowed}
-    .credits{padding:0 0 104px}.credit-card{max-width:760px;margin:auto;display:flex;align-items:center;gap:20px;padding:25px 28px;border:1px solid var(--line);border-radius:18px;background:#ffffff05}.credit-icon{width:48px;height:48px;border-radius:15px;background:#a78bfa18;display:grid;place-items:center;color:#c5b3ff;font-size:22px;flex:none}.credit-icon.gold{background:#ffd34d1c;color:#ffd34d}.credit-card p{margin:0;color:#c6cbda;font-size:15px}.credit-card strong{color:white}.credit-names{display:block;margin-top:8px;color:#9da6bb;font-size:13px;line-height:1.8}
-    footer{border-top:1px solid var(--line);padding:25px 0;color:#7f889f;font-size:12px}.footer-in{display:flex;align-items:center;justify-content:space-between;gap:14px}.footer-brand{color:#dce0eb;font:700 14px 'Space Grotesk',sans-serif}
-    @media(max-width:760px){.wrap{width:min(var(--max),calc(100% - 32px))}.links{gap:16px}.links a:not(.nav-cta){display:none}.hero{grid-template-columns:1fr;padding:66px 0 52px;gap:8px;text-align:center;min-height:auto}.hero p{margin:auto}.actions{justify-content:center}.visual{min-height:300px}.orb{width:245px}.card-one{right:3%;top:13%}.card-two{left:3%;bottom:9%}.strip-in{justify-content:center;flex-wrap:wrap}.features{grid-template-columns:1fr}.feature{min-height:0}.content{padding:78px 0!important}.download-box{padding:34px 25px}.download-box h2{font-size:32px}.footer-in{flex-direction:column}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
-  </style>
-  <style>
-    .download-cta{background:linear-gradient(110deg,#aa8cff,#7775ff);color:white;box-shadow:0 9px 30px #8666ec40;border:1px solid #c4afff}
-    .download-cta:hover{box-shadow:0 14px 38px #8666ec65;filter:brightness(1.08)}
-    @media(max-width:760px){.download-cta{background:linear-gradient(110deg,#ff5a62,#dc263c);box-shadow:0 10px 32px #f43b4c55;border-color:#ff9298}.download-cta:hover{box-shadow:0 14px 38px #f43b4c77}}
-  </style>
-  <style>
-    .orb{animation:orb-float 6s ease-in-out infinite,orb-glow 8s ease-in-out infinite;background-size:180% 180%;transform-origin:center}.orb svg{animation:logo-hover 6s ease-in-out infinite}.float-card{animation:card-float 5s ease-in-out infinite}.card-two{animation-delay:-2.4s}.spark{animation:spark-glow 3.6s ease-in-out infinite alternate}
-    @keyframes orb-float{0%,100%{translate:0 0;rotate:-1deg}50%{translate:0 -13px;rotate:1.5deg}}@keyframes orb-glow{0%,100%{background-position:0 40%;filter:drop-shadow(0 20px 28px #7764e033)}50%{background-position:100% 60%;filter:drop-shadow(0 28px 42px #8774ee66)}}@keyframes logo-hover{0%,100%{transform:rotate(9deg) scale(1)}50%{transform:rotate(13deg) scale(1.045)}}@keyframes card-float{0%,100%{translate:0 0}50%{translate:0 -8px}}@keyframes spark-glow{from{opacity:.5;scale:.8;rotate:-12deg}to{opacity:1;scale:1.18;rotate:12deg}}
-    .download-cta{background:linear-gradient(110deg,#aa8cff,#7775ff);color:white;box-shadow:0 9px 30px #8666ec40;border:1px solid #c4afff}.download-cta:hover{box-shadow:0 14px 38px #8666ec65;filter:brightness(1.08)}
-    @media(max-width:760px){nav{height:auto;min-height:68px}.links{gap:8px}.brand{font-size:17px;gap:7px}.brand-mark{width:31px;height:31px}.nav-cta{padding:8px 10px;font-size:12px}.visual{min-height:270px}.orb{width:min(245px,66vw)}.float-card{padding:10px 12px;font-size:11px}.float-card strong{font-size:12px}.download-cta{width:100%;max-width:360px}.hero h1{font-size:clamp(48px,14vw,68px)}.version-note{max-width:100%;line-height:1.4}}
-    @media(prefers-reduced-motion:reduce){.orb,.orb svg,.float-card,.spark{animation:none!important}}
-  </style>
-  <style>.download-label-mobile{display:none}@media(max-width:760px){.download-label-desktop{display:none}.download-label-mobile{display:inline}}</style>
-</head>
-<body>
-  <header class="topbar"><nav class="wrap" aria-label="Navegación principal">
-    <a class="brand" href="#inicio" aria-label="MyGeode, inicio"><span class="brand-mark"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 4 35 12.5v15L20 36 5 27.5v-15L20 4Z" stroke="white" stroke-width="2.5"/><path d="m13 15 7-4 7 4v9l-7 4-7-4v-9Z" fill="white" fill-opacity=".95"/><path d="m20 11 7 4-7 4-7-4 7-4Zm-7 4v9l7 4v-9l-7-4Z" fill="#8774ee"/></svg></span>MyGeode</a>
-    <div class="links"><a href="#funciones">Características</a><a href="#tutorial">Tutorial</a><a href="#descargar">Descargar</a><a href="#creditos">Créditos</a><select id="language-select" aria-label="Idioma" style="padding:8px 10px;border-radius:10px;border:1px solid #ffffff24;background:#1d2232;color:#fff"><option value="es">ES</option><option value="en">EN</option><option value="pt">PT</option><option value="fr">FR</option></select><a class="nav-cta" href="#descargar">Empezar <span aria-hidden="true">↗</span></a></div>
-  </nav></header>
-  <main>
-    <section class="wrap hero" id="inicio">
-      <div><span class="eyebrow"><i class="dot"></i> Un port comunitario de Geode</span><h1>Tu juego.<br><span>Tus mods.</span></h1><p>MyGeode lleva la experiencia de Geode a Geometry Dash: explora mods, personaliza tu juego y crea algo propio.</p><p style="display:inline-block;margin:18px 0 0;padding:8px 12px;border:1px solid #ffd34d60;border-radius:10px;background:#ffd34d12;color:#ffe28b;font-size:13px;font-weight:700">Compatible únicamente con Geometry Dash 2.2091.</p><p style="margin:9px 0 0;color:#ffd988;font-size:13px;font-weight:600">Estamos en beta y puede que algunos mods no funcionen.</p><div class="actions"><a class="button primary" href="https://www.mediafire.com/file/0jq3vg2ekqsjzzl/Geode.zip/file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 19h14"/></svg>Descargar MyGeode</a><a class="button secondary" href="#funciones">Conocer más <span aria-hidden="true">↓</span></a></div><p class="hint">Port comunitario basado en Geode SDK.</p></div>
-      <div class="visual" aria-label="Ilustración geométrica de MyGeode"><span class="spark s1">✦</span><span class="spark s2">✧</span><div class="orb"><svg viewBox="0 0 160 160" fill="none" aria-hidden="true"><path d="M80 13 139 47v66l-59 34-59-34V47l59-34Z" stroke="white" stroke-width="4"/><path d="m80 39 36 21v40l-36 21-36-21V60l36-21Z" fill="white" fill-opacity=".95"/><path d="m80 39 36 21-36 21-36-21 36-21Z" fill="#d9d2ff"/><path d="M44 60v40l36 21V81L44 60Z" fill="#eeeaff"/><path d="M116 60v40l-36 21V81l36-21Z" fill="#fff"/></svg></div><div class="float-card card-one"><strong>Hecho para jugar</strong>Mods a tu manera</div><div class="float-card card-two"><strong>MyGeode</strong>Comunidad y creatividad</div></div>
-    </section>
-    <div class="strip"><div class="wrap strip-in"><span><i class="strip-icon">✦</i><b>Mods</b> para expandir el juego</span><span><i class="strip-icon">◇</i><b>Comunidad</b> abierta</span><span><i class="strip-icon">⌘</i><b>Creatividad</b> sin límites</span></div></div>
-    <section class="content" id="funciones"><div class="wrap"><div class="section-head"><span class="kicker">Una nueva forma de jugar</span><h2>Más Geometry Dash,<br>como a ti te gusta.</h2><p>MyGeode nace para acercar las herramientas y la comunidad de mods a más jugadores.</p></div><div class="features">
-      <article class="feature"><div class="feature-icon">✧</div><h3>Amplía tu juego</h3><p>Descubre nuevas formas de jugar con mods creados por la comunidad.</p></article>
-      <article class="feature"><div class="feature-icon">◈</div><h3>Un proyecto comunitario</h3><p>Un port inspirado en Geode, construido alrededor de una comunidad creativa.</p></article>
-      <article class="feature"><div class="feature-icon">⌘</div><h3>Para quienes crean</h3><p>Un punto de partida para explorar el modding y compartir tus ideas.</p></article>
-    </div></div></section>
-    <section class="download" id="descargar"><div class="wrap"><div class="download-box"><span class="kicker">Descargas</span><h2>Elige tu plataforma.</h2><p>MyGeode funciona en Windows y Linux. El archivo descargable de esta página es el paquete para Windows.</p><div class="platforms"><span class="platform">Windows · disponible</span><span class="platform">Linux · disponible</span></div><a class="button download-cta" href="https://www.mediafire.com/file/0jq3vg2ekqsjzzl/Geode.zip/file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 19h14"/></svg><span class="download-label-desktop">Descargar</span><span class="download-label-mobile">Solo Windows o Linux</span><span aria-hidden="true">↓</span></a><p class="release-note">Paquete ZIP · Windows. MyGeode también funciona en Linux.</p></div></div></section>
-    <section class="content" id="tutorial"><div class="wrap"><div class="section-head"><span class="kicker">Empieza en unos pasos</span><h2>Tutorial de instalación</h2><p>Instala MyGeode y vuelve al juego.</p></div><div class="features">
-      <article class="feature"><div class="feature-icon">01</div><h3>Descomprimir</h3><p>Extrae el contenido del archivo ZIP de MyGeode.</p></article>
-      <article class="feature"><div class="feature-icon">02</div><h3>Copiar los archivos</h3><p>Pon los archivos extraídos en tu carpeta de Geometry Dash.</p></article>
-      <article class="feature"><div class="feature-icon">03</div><h3>¡A disfrutar!</h3><p>¡Listo! Ya puedes disfrutar de MyGeode.</p></article>
-    </div></div></section>
-    <section class="credits" id="creditos"><div class="wrap"><div class="section-head"><span class="kicker">Agradecimientos</span><h2>Créditos</h2><p>Reconocimiento a quienes hicieron posible MyGeode.</p></div><div class="credit-card"><div class="credit-icon">✦</div><p><strong>Base de Geode:</strong> equipo creador de Geode SDK.<span class="credit-names">HJfod, Alk1m123, Mat, ConfiG, Cvolton, Camila314, zmx, PoweredByPie, fig, FireCubez y todas las personas colaboradoras.</span></p></div><div class="credit-card" style="margin:14px auto 0"><div class="credit-icon gold">✦</div><p><strong>MyGeode Updated team:</strong><span class="credit-names">Criscode, Tv, CrislegenX</span></p></div></div></section>
-  </main>
-  <footer><div class="wrap footer-in"><a class="footer-brand" href="#inicio">MyGeode</a><span>Proyecto comunitario para Geometry Dash.</span><a href="#creditos">Créditos</a></div></footer>
-  <script>
-    const languageText = {
-      en: {'Características':'Features','Descargar':'Download','Créditos':'Credits','Empezar':'Get started','Un port comunitario de Geode':'A community port of Geode','Tu juego.':'Your game.','Tus mods.':'Your mods.','MyGeode lleva la experiencia de Geode a Geometry Dash: explora mods, personaliza tu juego y crea algo propio.':'MyGeode brings Geode to Geometry Dash: explore mods, customize your game, and make it your own.','Compatible únicamente con Geometry Dash 2.2091.':'Only compatible with Geometry Dash version 2.2091.','Estamos en beta y puede que algunos mods no funcionen.':'We are in beta, and some mods may not work.','Descargar MyGeode':'Download MyGeode','Solo Windows o Linux':'Windows or Linux only','Conocer más':'Learn more','Port comunitario basado en Geode SDK.':'A community port based on Geode SDK.','Hecho para jugar':'Made for playing','Mods a tu manera':'Mods your way','Comunidad y creatividad':'Community and creativity','Una nueva forma de jugar':'A new way to play','Más Geometry Dash,':'More Geometry Dash,','como a ti te gusta.':'the way you like it.','MyGeode nace para acercar las herramientas y la comunidad de mods a más jugadores.':'MyGeode brings modding tools and community to more players.','Amplía tu juego':'Expand your game','Descubre nuevas formas de jugar con mods creados por la comunidad.':'Discover new ways to play with community-made mods.','Un proyecto comunitario':'A community project','Un port inspirado en Geode, construido alrededor de una comunidad creativa.':'A Geode-inspired port built around a creative community.','Para quienes crean':'For creators','Un punto de partida para explorar el modding y compartir tus ideas.':'A starting point to explore modding and share your ideas.','Descargas':'Downloads','Elige tu plataforma.':'Choose your platform.','MyGeode funciona en Windows y Linux. El archivo descargable de esta página es el paquete para Windows.':'MyGeode works on Windows and Linux. The downloadable file here is the Windows package.','Windows · disponible':'Windows · available','Linux · disponible':'Linux · available','Paquete ZIP · Windows. MyGeode también funciona en Linux.':'ZIP package · Windows. MyGeode also works on Linux.','Empieza en unos pasos':'Get started in a few steps','Tutorial de instalación':'Installation tutorial','Instala MyGeode y vuelve al juego.':'Install MyGeode and get back to the game.','Descomprimir':'Extract the files','Extrae el contenido del archivo ZIP de MyGeode.':'Extract the contents of the MyGeode ZIP file.','Copiar los archivos':'Copy the files','Pon los archivos extraídos en tu carpeta de Geometry Dash.':'Place the extracted files in your Geometry Dash folder.','¡A disfrutar!':'Enjoy!','¡Listo! Ya puedes disfrutar de MyGeode.':'That’s it! You can now enjoy MyGeode.','Agradecimientos':'Thanks','Proyecto comunitario para Geometry Dash.':'A community project for Geometry Dash.'},
-      pt: {'Características':'Recursos','Descargar':'Baixar','Créditos':'Créditos','Empezar':'Começar','Un port comunitario de Geode':'Um port comunitário do Geode','Tu juego.':'Seu jogo.','Tus mods.':'Seus mods.','MyGeode lleva la experiencia de Geode a Geometry Dash: explora mods, personaliza tu juego y crea algo propio.':'MyGeode traz Geode para Geometry Dash: explore mods, personalize seu jogo e crie algo seu.','Compatible únicamente con Geometry Dash 2.2091.':'Compatível somente com Geometry Dash versão 2.2091.','Estamos en beta y puede que algunos mods no funcionen.':'Estamos em beta e alguns mods podem não funcionar.','Descargar MyGeode':'Baixar MyGeode','Solo Windows o Linux':'Somente Windows ou Linux','Conocer más':'Saiba mais','Port comunitario basado en Geode SDK.':'Port comunitário baseado no Geode SDK.','Hecho para jugar':'Feito para jogar','Mods a tu manera':'Mods do seu jeito','Comunidad y creatividad':'Comunidade e criatividade','Una nueva forma de jugar':'Uma nova forma de jogar','Más Geometry Dash,':'Mais Geometry Dash,','como a ti te gusta.':'do jeito que você gosta.','MyGeode nace para acercar las herramientas y la comunidad de mods a más jugadores.':'MyGeode aproxima ferramentas e comunidade de mods de mais jogadores.','Amplía tu juego':'Expanda seu jogo','Descubre nuevas formas de jugar con mods creados por la comunidad.':'Descubra novas formas de jogar com mods feitos pela comunidade.','Un proyecto comunitario':'Um projeto comunitário','Un port inspirado en Geode, construido alrededor de una comunidad creativa.':'Um port inspirado no Geode, feito por uma comunidade criativa.','Para quienes crean':'Para quem cria','Un punto de partida para explorar el modding y compartir tus ideas.':'Um ponto de partida para explorar mods e compartilhar suas ideias.','Descargas':'Downloads','Elige tu plataforma.':'Escolha sua plataforma.','MyGeode funciona en Windows y Linux. El archivo descargable de esta página es el paquete para Windows.':'MyGeode funciona no Windows e no Linux. O arquivo disponível aqui é o pacote para Windows.','Windows · disponible':'Windows · disponível','Linux · disponible':'Linux · disponível','Paquete ZIP · Windows. MyGeode también funciona en Linux.':'Arquivo ZIP · Windows. MyGeode também funciona no Linux.','Empieza en unos pasos':'Comece em poucos passos','Tutorial de instalación':'Tutorial de instalação','Instala MyGeode y vuelve al juego.':'Instale MyGeode e volte ao jogo.','Descomprimir':'Descompactar','Extrae el contenido del archivo ZIP de MyGeode.':'Extraia o conteúdo do arquivo ZIP do MyGeode.','Copiar los archivos':'Copiar os arquivos','Pon los archivos extraídos en tu carpeta de Geometry Dash.':'Coloque os arquivos na pasta do Geometry Dash.','¡A disfrutar!':'Aproveite!','¡Listo! Ya puedes disfrutar de MyGeode.':'Pronto! Aproveite o MyGeode.','Agradecimientos':'Agradecimentos','Proyecto comunitario para Geometry Dash.':'Projeto comunitário para Geometry Dash.'},
-      fr: {'Características':'Fonctionnalités','Descargar':'Télécharger','Créditos':'Crédits','Empezar':'Commencer','Un port comunitario de Geode':'Un port communautaire de Geode','Tu juego.':'Votre jeu.','Tus mods.':'Vos mods.','MyGeode lleva la experiencia de Geode a Geometry Dash: explora mods, personaliza tu juego y crea algo propio.':'MyGeode apporte Geode à Geometry Dash : découvrez des mods, personnalisez votre jeu et créez votre expérience.','Compatible únicamente con Geometry Dash 2.2091.':'Compatible uniquement avec Geometry Dash version 2.2091.','Estamos en beta y puede que algunos mods no funcionen.':'Nous sommes en bêta et certains mods peuvent ne pas fonctionner.','Descargar MyGeode':'Télécharger MyGeode','Solo Windows o Linux':'Windows ou Linux uniquement','Conocer más':'En savoir plus','Port comunitario basado en Geode SDK.':'Un port communautaire basé sur Geode SDK.','Hecho para jugar':'Conçu pour jouer','Mods a tu manera':'Vos mods, à votre façon','Comunidad y creatividad':'Communauté et créativité','Una nueva forma de jugar':'Une nouvelle façon de jouer','Más Geometry Dash,':'Encore plus de Geometry Dash,','como a ti te gusta.':'comme vous l’aimez.','MyGeode nace para acercar las herramientas y la comunidad de mods a más jugadores.':'MyGeode rend les outils et la communauté des mods accessibles à plus de joueurs.','Amplía tu juego':'Enrichissez votre jeu','Descubre nuevas formas de jugar con mods creados por la comunidad.':'Découvrez de nouvelles façons de jouer avec les mods de la communauté.','Un proyecto comunitario':'Un projet communautaire','Un port inspirado en Geode, construido alrededor de una comunidad creativa.':'Un port inspiré de Geode, porté par une communauté créative.','Para quienes crean':'Pour les créateurs','Un punto de partida para explorar el modding y compartir tus ideas.':'Un point de départ pour découvrir le modding et partager vos idées.','Descargas':'Téléchargements','Elige tu plataforma.':'Choisissez votre plateforme.','MyGeode funciona en Windows y Linux. El archivo descargable de esta página es el paquete para Windows.':'MyGeode fonctionne sur Windows et Linux. Le fichier disponible ici est le paquet Windows.','Windows · disponible':'Windows · disponible','Linux · disponible':'Linux · disponible','Paquete ZIP · Windows. MyGeode también funciona en Linux.':'Archive ZIP · Windows. MyGeode fonctionne aussi sur Linux.','Empieza en unos pasos':'Commencez en quelques étapes','Tutorial de instalación':'Tutoriel d’installation','Instala MyGeode y vuelve al juego.':'Installez MyGeode et retournez au jeu.','Descomprimir':'Décompresser','Extrae el contenido del archivo ZIP de MyGeode.':'Extrayez le contenu du fichier ZIP MyGeode.','Copiar los archivos':'Copier les fichiers','Pon los archivos extraídos en tu carpeta de Geometry Dash.':'Placez les fichiers dans votre dossier Geometry Dash.','¡A disfrutar!':'Profitez-en !','¡Listo! Ya puedes disfrutar de MyGeode.':'Voilà ! Profitez maintenant de MyGeode.','Agradecimientos':'Remerciements','Proyecto comunitario para Geometry Dash.':'Un projet communautaire pour Geometry Dash.'}
-    };
-    const selector = document.getElementById('language-select');
-    const textNodes = new Map();
-    const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    while (textWalker.nextNode()) textNodes.set(textWalker.currentNode, textWalker.currentNode.nodeValue);
-    selector.addEventListener('change', () => {
-      const lang = selector.value;
-      document.documentElement.lang = lang;
-      for (const [node, source] of textNodes) {
-        const key = source.trim();
-        node.nodeValue = source.replace(key, languageText[lang]?.[key] || key);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyGeode</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
       }
-    });
-  </script>
-</body>
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(circle at top, #1e293b 0%, var(--bg) 55%);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .card {
+        width: min(90vw, 760px);
+        background: rgba(17, 24, 39, 0.8);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 18px;
+        padding: 48px 32px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        letter-spacing: 0.06em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>MyGeode</h1>
+      <p>Tu sitio público está listo para GitHub Pages.</p>
+    </main>
+  </body>
 </html>
-
-
-
-
